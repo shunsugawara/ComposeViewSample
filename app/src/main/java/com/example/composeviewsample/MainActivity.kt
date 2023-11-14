@@ -6,41 +6,41 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.composeviewsample.ui.theme.ComposeViewSampleTheme
+import com.example.composeviewsample.ui.view.ListTop
+import com.example.composeviewsample.ui.view.TextSamples
+
+enum class NavigationKey {
+    LIST_TOP, TEXT
+}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeViewSampleTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = NavigationKey.LIST_TOP.name
+                    ) {
+                        composable(route = NavigationKey.LIST_TOP.name) {
+                            ListTop(modifier = Modifier, navController)
+                        }
+                        composable(route = NavigationKey.TEXT.name) {
+                            TextSamples(navController = navController)
+                        }
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComposeViewSampleTheme {
-        Greeting("Android")
     }
 }
