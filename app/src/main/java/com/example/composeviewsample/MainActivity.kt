@@ -52,10 +52,10 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(it)
                     ) {
                         composable(route = NavigationKey.LIST_TOP.name) {
-                            ListTop(modifier = Modifier, navController)
+                            ListTop(navController)
                         }
                         composable(route = NavigationKey.TEXT.name) {
-                            TextSamples(navController = navController)
+                            TextSamples()
                         }
                     }
                 }

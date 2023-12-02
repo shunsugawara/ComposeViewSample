@@ -19,21 +19,20 @@ import com.example.composeviewsample.NavigationKey
 import com.example.composeviewsample.ui.theme.ComposeViewSampleTheme
 
 @Composable
-fun ListTop(modifier: Modifier = Modifier, navController: NavController? = null) {
+fun ListTop(navController: NavController? = null) {
     LazyColumn {
         item {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(100.dp)
-                    .background(Color.Blue.copy(alpha = 0.3f))
+                    .background(Color.Blue.copy(alpha = 0.1f))
                     .padding(horizontal = 20.dp)
                     .clickable { navController?.navigate(NavigationKey.TEXT.name) },
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
                     text = "Text Sample",
-                    modifier = modifier
                 )
             }
         }
